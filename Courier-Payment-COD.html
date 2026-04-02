@@ -315,10 +315,10 @@
         <option value="">جاري تحميل المناديب...</option>
       </select>
       <button class="fetch-btn" id="fetchBtn" onclick="fetchOrders()" disabled>
-        🔍 جلب الأوردرات
+        🔍 استعلام الأوردرات
       </button>
     </div>
-    <div class="fetch-hint" id="fetchHint">اختر مندوباً لجلب أوردراته غير المدفوعة</div>
+    <div class="fetch-hint" id="fetchHint">اختر مندوباً للاستعلام عن أوردراته غير المدفوعة</div>
   </div>
 
   <!-- Stats -->
@@ -535,8 +535,8 @@
 
     const btn = $('fetchBtn');
     btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span> جاري الجلب...`;
-    $('fetchHint').textContent = `جاري جلب أوردرات ${courier}...`;
+    btn.innerHTML = `<span class="spinner"></span> جاري الاستعلام...`;
+    $('fetchHint').textContent = `جاري الاستعلام عن أوردرات ${courier}...`;
     hideResult();
     allOrders = [];
     renderTable();
@@ -550,8 +550,8 @@
       const data = await res.json();
 
       if (!data.success) {
-        $('fetchHint').textContent = data.error || 'خطأ في الجلب';
-        btn.disabled = false; btn.textContent = '🔍 جلب الأوردرات';
+        $('fetchHint').textContent = data.error || 'خطأ في الاستعلام';
+        btn.disabled = false; btn.textContent = '🔍 استعلام الأوردرات';
         return;
       }
 
@@ -559,7 +559,7 @@
       if (!allOrders.length) {
         $('fetchHint').textContent = `لا توجد أوردرات غير مدفوعة لـ ${courier}`;
       } else {
-        $('fetchHint').textContent = `تم جلب ${allOrders.length} أوردر غير مدفوع لـ ${courier}`;
+        $('fetchHint').textContent = `تم الاستعلام عن ${allOrders.length} أوردر غير مدفوع لـ ${courier}`;
       }
 
       renderTable();
@@ -570,7 +570,7 @@
     }
 
     btn.disabled = false;
-    btn.textContent = '🔍 جلب الأوردرات';
+    btn.textContent = '🔍 استعلام الأوردرات';
   }
 
   // ── Render table ──────────────────────────────────────────────────
